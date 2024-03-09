@@ -1,0 +1,8 @@
+PS E:\Programming Code\jenkins\New folder> docker build -t myjenkinsagents .
+PS E:\Programming Code\jenkins\New folder> docker images
+
+docker tag myjenkinsagents tharindu37/myjenkinsagents:v1.0
+
+PS E:\Programming Code\jenkins\New folder> docker login
+
+PS E:\Programming Code\jenkins\New folder> docker push tharindu37/myjenkinsagents:v1.0

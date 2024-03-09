@@ -1,0 +1,42 @@
+=========Jenkins=========
+docker pull jenkins/jenkins
+docker run -p 8080:8080 -p 50000:50000 -d -v jenkins_home:/var/jenkins_home jenkins/jenkins:lts
+docker ps
+docker logs 'container id'
+
+
+Create the network 'jenkins'
+===========================
+docker network create jenkins
+docker network ls
+
+Jenkins FileSystem and Workspace
+===============================
+docker exec -it awesome_kapitsa bash
+jenkins@3bd804697e5f:/$ pwd
+jenkins@3bd804697e5f:~$ ls -ltra
+jenkins@3bd804697e5f:~/workspace/my_first_job$ cat test.txt
+jenkins@3bd804697e5f:~/workspace/my_first_job$ cd ~
+jenkins@3bd804697e5f:~$ pwd
+
+Install Python to Jenkins server
+===============================
+C:\Users\ASUS>docker exec -u 0 -it awesome_kapitsa apt-get update
+C:\Users\ASUS>docker exec -u 0 -it awesome_kapitsa apt-get install -y python3 python3-pip
+
+alpine/socat container to forward traffic from Jenkins to Docker Desktop on Host Machine
+=======================================================================================
+https://stackoverflow.com/questions/47709208/how-to-find-docker-host-uri-to-be-used-in-jenkins-docker-plugin
+
+docker run -d --restart=always -p 127.0.0.1:2376:2375 --network jenkins -v /var/run/docker.sock:/var/run/docker.sock alpine/socat tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+
+https://hub.docker.com/r/alpine/socat/
+
+docker run -d --restart=always -p 127.0.0.1:2376:2375 -v /var/run/docker.sock:/var/run/docker.sock alpine/socat tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+
+docker inspect <container_id> | grep IPAddress
+
+Using my Jenkins Python Agent
+============================
+docker pull devopsjourney1/myjenkinsagents:python
+
